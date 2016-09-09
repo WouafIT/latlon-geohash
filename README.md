@@ -36,6 +36,7 @@ Usage
 - `Geohash.bounds(geohash)`: return { sw, ne } bounds of given geohash.
 - `Geohash.adjacent(geohash, direction)`: return adjacent cell to given geohash in specified direction (N/S/E/W).
 - `Geohash.neighbours(geohash)`: return all 8 adjacent cells (n/ne/e/se/s/sw/w/nw) to given geohash.
+- `Geohash.geoneighbours(lat, lon, [precision])`: return all 8 adjacent cells center coordinates (n/ne/e/se/s/sw/w/nw) to given latitude/longitude point with the given precision
 
 Note to obtain neighbours as an array, you can use
 

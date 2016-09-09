@@ -240,6 +240,30 @@ Geohash.neighbours = function(geohash) {
     };
 };
 
+/**
+ * Returns all 8 adjacent cells for specified latitude/longitude, either to specified precision or to automatically
+ * evaluated precision.
+ *
+ * @param   {number} lat - Latitude in degrees.
+ * @param   {number} lon - Longitude in degrees.
+ * @param   {number} [precision] - Number of characters in resulting geohash.
+ * @returns {{n,ne,e,se,s,sw,w,nw: {lat:number, lon:number}}}
+ * @throws  Invalid geohash.
+ */
+Geohash.geoneighbours = function(lat, lon, precision) {
+    var geohash = Geohash.encode(lat, lon, precision);
+    return {
+        'n':  Geohash.decode(Geohash.adjacent(geohash, 'n')),
+        'ne': Geohash.decode(Geohash.adjacent(Geohash.adjacent(geohash, 'n'), 'e')),
+        'e':  Geohash.decode(Geohash.adjacent(geohash, 'e')),
+        'se': Geohash.decode(Geohash.adjacent(Geohash.adjacent(geohash, 's'), 'e')),
+        's':  Geohash.decode(Geohash.adjacent(geohash, 's')),
+        'sw': Geohash.decode(Geohash.adjacent(Geohash.adjacent(geohash, 's'), 'w')),
+        'w':  Geohash.decode(Geohash.adjacent(geohash, 'w')),
+        'nw': Geohash.decode(Geohash.adjacent(Geohash.adjacent(geohash, 'n'), 'w'))
+    };
+};
+
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 if (typeof module != 'undefined' && module.exports) module.exports = Geohash; // CommonJS, node.js
